@@ -1,45 +1,76 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UserPanelAggregator : MonoBehaviour
 {
-    [SerializeField] private bool spawnAllPanels;
-    
-    private IUserDataManagerService _userDataManager;
-    private IUserPanelSpawnerService _spawnerService;
+    [SerializeField] private ViewScroller viewScroller;
+
+    private int _currentId = 0;
+    private IUserDataManagerService _userDataManagerService;
+    private bool _isInitialized;
+
+    private void OnEnable()
+    {
+        viewScroller.NewPanelSpawnedBack += SpawnedObjectBack;
+        viewScroller.NewPanelSpawnedForward += SpawnedObjectForward;
+    }
+
+    private void OnDisable()
+    {
+        viewScroller.NewPanelSpawnedBack -= SpawnedObjectBack;
+        viewScroller.NewPanelSpawnedForward -= SpawnedObjectForward;
+    }
 
     private void Start()
     {
-        _userDataManager = ServiceLocator.GetService<IUserDataManagerService>();
-        _spawnerService = ServiceLocator.GetService<IUserPanelSpawnerService>();
-        if (spawnAllPanels)
-        {
-            SpawnAllPanel();
-        }
-        else
-        {
-            StartCoroutine(SpawnPanels());
-        }
+        viewScroller.IsMoveUpUnlocked = true;
+        _userDataManagerService ??= ServiceLocator.GetService<IUserDataManagerService>();
     }
 
-    private IEnumerator SpawnPanels()
+    private void Update()
     {
-        var userDatas = _userDataManager.UserDatas;
-        foreach (var userData in userDatas)
+        if (!_userDataManagerService.IsDataLoaded || _isInitialized)
         {
-            yield return null;
-            var newPanelItem = _spawnerService.SpawnNewPanelItem();
-            newPanelItem.Initialize(userData);
+            return;
         }
+        _isInitialized = true;
+        viewScroller.SpawnPanels(11);
     }
 
-    private void SpawnAllPanel()
+    private void SpawnedObjectForward(MonoPooledWithRectTransform monoPooledWithRectTransform)
     {
-        var userDatas = _userDataManager.UserDatas;
-        foreach (var userData in userDatas)
+        var loadPanel = monoPooledWithRectTransform.GetComponent<LoadPanelItem>();
+        var id = _currentId - viewScroller.SpawnedView.Count-1;
+        _currentId--;
+        var user = _userDataManagerService.GetUserDataById(id);
+        if (user == null)
         {
-            var newPanelItem = _spawnerService.SpawnNewPanelItem();
-            newPanelItem.Initialize(userData);
+            viewScroller.IsMoveUpUnlocked = false;
+            return;
         }
+
+        if (id == 0)
+        {
+            viewScroller.IsMoveUpUnlocked = false;
+        }
+        loadPanel.Initialize(_userDataManagerService.GetUserDataById(id), id);
+    }
+
+    private void SpawnedObjectBack(MonoPooledWithRectTransform monoPooledWithRectTransform)
+    {
+        _userDataManagerService ??= ServiceLocator.GetService<IUserDataManagerService>();
+        var loadPanel = monoPooledWithRectTransform.GetComponent<LoadPanelItem>();
+        var id = _currentId;
+        _currentId++;
+        var user = _userDataManagerService.GetUserDataById(id);
+        if (user == null)
+        {
+            viewScroller.IsMoveDownUnlocked = false;
+            return;
+        }
+
+        loadPanel.Initialize(_userDataManagerService.GetUserDataById(id), id);
     }
 }

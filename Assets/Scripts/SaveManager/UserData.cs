@@ -1,9 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.VersionControl;
-using FileMode = System.IO.FileMode;
-using Task = System.Threading.Tasks.Task;
 
 [Serializable]
 public class UserData

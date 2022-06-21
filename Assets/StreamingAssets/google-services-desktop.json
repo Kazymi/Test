@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1034485242615",
+    "firebase_url": "https://testtask-cb45e-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "testtask-cb45e",
+    "storage_bucket": "testtask-cb45e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1034485242615:android:9dbd08b2680042bc6151f2",
+        "android_client_info": {
+          "package_name": "com.TestGameNameCompany.TestGameName"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1034485242615-jnihmkih38i9icnooenia74l39inidr1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCb-tYy0-6VlVZ4xj4uCKzJCla--g3Hbm4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1034485242615-jnihmkih38i9icnooenia74l39inidr1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,13 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LoadPanelItem : MonoPooled
+[RequireComponent(typeof(RectTransform))]
+public class LoadPanelItem : MonoPooledWithRectTransform
 {
     [SerializeField] private LoadPanelConfiguration loadPanelConfiguration;
 
-    public void Initialize(UserData userData)
+    public int ID { get; private set; }
+
+    public void Initialize(UserData userData, int id)
     {
+        ID = id;
         loadPanelConfiguration.FistNameText.text = userData.first_name;
         loadPanelConfiguration.LastNameText.text = userData.last_name;
         loadPanelConfiguration.MailText.text = userData.email;

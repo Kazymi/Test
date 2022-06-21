@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Yauheni\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Yauheni\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_Test.-1836098978.00" t="ExcludeRecursive" />
+    <e p="F:\fork\Test" t="IncludeRecursive">
+      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="google-services.json" t="Include" />
+        <e p="Plugins" t="Include">
+          <e p="Android" t="Include">
+            <e p="FirebaseApp.androidlib" t="Include">
+              <e p="AndroidManifest.xml" t="Include" />
+              <e p="res" t="Include">
+                <e p="values" t="Include">
+                  <e p="google-services.xml" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Scripts" t="Include">
+          <e p="Factory" t="Include">
+            <e p="FactoryMonoObject.cs" t="Include" />
+            <e p="IFactory.cs" t="Include" />
+            <e p="IPool.cs" t="Include" />
+            <e p="IPooledObject.cs" t="Include" />
+            <e p="MonoPooledWithRectTransform.cs" t="Include" />
+            <e p="Pool.cs" t="Include" />
+          </e>
+          <e p="SaveManager" t="Include">
+            <e p="FireBaseLoadManager.cs" t="Include" />
+            <e p="Installer.cs" t="Include" />
+            <e p="IUserDataManagerService.cs" t="Include" />
+            <e p="IUserPanelSpawnerService.cs" t="Include" />
+            <e p="LoadManager.cs" t="Include" />
+            <e p="UserData.cs" t="Include" />
+            <e p="UserDataManager.cs" t="Include" />
+            <e p="UserPanelAggregator.cs" t="Include" />
+            <e p="UserPanelSpawner.cs" t="Include" />
+          </e>
+          <e p="ServiceLocator" t="Include">
+            <e p="ILoadManagerService.cs" t="Include" />
+            <e p="ServiceLocator.cs" t="Include" />
+          </e>
+          <e p="UI" t="Include">
+            <e p="LoadPanelConfiguration.cs" t="Include" />
+            <e p="LoadPanelItem.cs" t="Include" />
+            <e p="SpeedController.cs" t="Include" />
+            <e p="ViewScroller.cs" t="Include" />
+            <e p="ViewScrollerConfiguration.cs" t="Include" />
+          </e>
+        </e>
+        <e p="StreamingAssets" t="Include">
+          <e p="google-services-desktop.json" t="Include" />
+        </e>
+        <e p="test_mock_dt.json" t="Include" />
+        <e p="TextMesh Pro" t="Include">
+          <e p="Fonts" t="Include">
+            <e p="LiberationSans - OFL.txt" t="Include" />
+          </e>
+          <e p="Resources" t="Include">
+            <e p="LineBreaking Following Characters.txt" t="Include" />
+            <e p="LineBreaking Leading Characters.txt" t="Include" />
+          </e>
+          <e p="Shaders" t="Include">
+            <e p="TMP_Bitmap-Custom-Atlas.shader" t="Include" />
+            <e p="TMP_Bitmap-Mobile.shader" t="Include" />
+            <e p="TMP_Bitmap.shader" t="Include" />
+            <e p="TMP_SDF Overlay.shader" t="Include" />
+            <e p="TMP_SDF SSD.shader" t="Include" />
+            <e p="TMP_SDF-Mobile Masking.shader" t="Include" />
+            <e p="TMP_SDF-Mobile Overlay.shader" t="Include" />
+            <e p="TMP_SDF-Mobile SSD.shader" t="Include" />
+            <e p="TMP_SDF-Mobile.shader" t="Include" />
+            <e p="TMP_SDF-Surface-Mobile.shader" t="Include" />
+            <e p="TMP_SDF-Surface.shader" t="Include" />
+            <e p="TMP_SDF.shader" t="Include" />
+            <e p="TMP_Sprite.shader" t="Include" />
+            <e p="TMPro.cginc" t="Include" />
+            <e p="TMPro_Mobile.cginc" t="Include" />
+            <e p="TMPro_Properties.cginc" t="Include" />
+            <e p="TMPro_Surface.cginc" t="Include" />
+          </e>
+          <e p="Sprites" t="Include">
+            <e p="EmojiOne Attribution.txt" t="Include" />
+            <e p="EmojiOne.json" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\Bin" t="ExcludeRecursive" />
+      <e p="Test.sln" t="IncludeFlat" />
+    </e>
+  </component>
+</project>

@@ -2,16 +2,14 @@
 
 public class UserPanelSpawner : IUserPanelSpawnerService
 {
-    private readonly Transform _contentTransform;
     private readonly Transform _disableObjectTransform;
     private readonly LoadPanelItem _userDataPanelPrefab;
 
     private IPool<LoadPanelItem> _pool;
 
-    public UserPanelSpawner(Transform contentTransform, Transform disableObjectTransform,
+    public UserPanelSpawner(Transform disableObjectTransform,
         LoadPanelItem userDataPanelPrefab)
     {
-        _contentTransform = contentTransform;
         _disableObjectTransform = disableObjectTransform;
         _userDataPanelPrefab = userDataPanelPrefab;
         PoolInitialize();
@@ -27,7 +25,6 @@ public class UserPanelSpawner : IUserPanelSpawnerService
     public LoadPanelItem SpawnNewPanelItem()
     {
         var newPanel = _pool.Pull();
-        newPanel.transform.parent = _contentTransform;
         return newPanel;
     }
 }
