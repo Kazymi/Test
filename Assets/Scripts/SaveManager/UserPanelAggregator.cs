@@ -36,7 +36,7 @@ public class UserPanelAggregator : MonoBehaviour
             return;
         }
         _isInitialized = true;
-        viewScroller.SpawnPanels(11);
+        viewScroller.SpawnPanels(15);
     }
 
     private void SpawnedObjectForward(MonoPooledWithRectTransform monoPooledWithRectTransform)

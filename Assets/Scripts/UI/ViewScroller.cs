@@ -1,17 +1,15 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ViewScroller : MonoBehaviour
 {
-    [SerializeField] private int speed = 20;
+    [SerializeField] private float duration = 20;
+    [SerializeField] private int maxSpeed = 10;
     [SerializeField] private MonoPooledWithRectTransform panel;
     [SerializeField] private int AmountPanelOnStart;
     [SerializeField] private Transform pivot;
     [SerializeField] private ViewScrollerConfiguration viewScrollerConfiguration;
-    [SerializeField] private Scrollbar _scrollbar;
 
     private IPool<MonoPooledWithRectTransform> _poolPanels;
 
@@ -21,10 +19,11 @@ public class ViewScroller : MonoBehaviour
     public bool IsMoveUpUnlocked { get; set; } = true;
     public bool IsMoveDownUnlocked { get; set; } = true;
 
-    public int SetSpeed
-    {
-        set => speed = value;
-    }
+    private Vector3 _dragStartPosition;
+    private Vector3 _dragCurrentPosition;
+    private Vector3 _deltaPosition;
+
+    private bool _isTuched = false;
 
     public List<MonoPooledWithRectTransform> SpawnedView { get; } = new List<MonoPooledWithRectTransform>();
 
@@ -36,8 +35,28 @@ public class ViewScroller : MonoBehaviour
     private void Update()
     {
         Scroll();
+        UpdateInput();
     }
 
+    private void UpdateInput()
+    {
+        if (_isTuched == false)
+        {
+            if (Input.touchCount != 0)
+            {
+                _isTuched = true;
+                OnPointerDown();
+            }
+        }
+        else
+        {
+            OnDrag();
+            if (Input.touchCount == 0)
+            {
+                _isTuched = false;
+            }
+        }
+    }
     private void Initialize()
     {
         var factory = new FactoryMonoObject<MonoPooledWithRectTransform>(panel.gameObject, transform);
@@ -55,18 +74,32 @@ public class ViewScroller : MonoBehaviour
     {
         foreach (var panelItem in SpawnedView)
         {
-            if (_scrollbar.value > 0.5)
+            if (_deltaPosition == Vector3.zero)
             {
-                if (IsMoveDownUnlocked == false) return;
-                var speedMove = speed;
+                break;
+            }
+            if (_deltaPosition.y > 0)
+            {
+                if (IsMoveDownUnlocked == false)
+                {
+                    break;
+                }
+
+                var speedMove = duration * _deltaPosition.y;
+                if (speedMove > maxSpeed) speedMove = maxSpeed;
                 panelItem.RectTransform.anchoredPosition +=
                     new Vector2(0, speedMove);
             }
             else
             {
-                if (IsMoveUpUnlocked == false) return;
-                var speedMove = speed;
-                panelItem.RectTransform.anchoredPosition -=
+                if (IsMoveUpUnlocked == false)
+                {
+                    break;
+                }
+
+                var speedMove = duration * _deltaPosition.y;
+                if (speedMove < -maxSpeed) speedMove = -maxSpeed;
+                panelItem.RectTransform.anchoredPosition +=
                     new Vector2(0, speedMove);
             }
         }
@@ -144,19 +177,8 @@ public class ViewScroller : MonoBehaviour
 
     private void RecalculatePanels()
     {
-        bool isNeedRecursion = false;
         foreach (var view in SpawnedView)
         {
-            if (view.RectTransform.anchoredPosition.y > viewScrollerConfiguration.MAXY)
-            {
-                var removedPanel = view;
-                AddNewPanelBack();
-                SpawnedView.Remove(removedPanel);
-                IsMoveUpUnlocked = true;
-                removedPanel.ReturnToPool();
-                break;
-            }
-
             if (view.RectTransform.anchoredPosition.y < viewScrollerConfiguration.MINY)
             {
                 var removedPanel = view;
@@ -166,6 +188,28 @@ public class ViewScroller : MonoBehaviour
                 removedPanel.ReturnToPool();
                 break;
             }
+            
+            if (view.RectTransform.anchoredPosition.y > viewScrollerConfiguration.MAXY)
+            {
+                var removedPanel = view;
+                AddNewPanelBack();
+                SpawnedView.Remove(removedPanel);
+                IsMoveUpUnlocked = true;
+                removedPanel.ReturnToPool();
+                break;
+            }
         }
+    }
+
+    private void OnPointerDown()
+    {
+        _dragStartPosition = Input.GetTouch(0).position;
+    }
+
+    private void OnDrag()
+    {
+        _dragCurrentPosition = Input.GetTouch(0).position;
+        _deltaPosition = _dragStartPosition - _dragCurrentPosition;
+        _dragStartPosition = _dragCurrentPosition;
     }
 }

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8d6883ac716498381aa037c99e6d1d1, type: 3}
   m_Name: ViewScrollerConfiguration
   m_EditorClassIdentifier: 
-  scrollSpeed: 200
   panelHeight: 120
   maxY: 120
-  minY: -1200
+  minY: -1680
